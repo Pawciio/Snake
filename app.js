@@ -57,4 +57,45 @@ function draw() {
     }
     ctx.fillStyle = "red";
     ctx.fillRect(food.x, food.y, box, box);
+
+
+    // head position
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    // with direction
+
+    if(d == "LEFT") snakeX -= box;
+    if(d == "UP") snakeY -= box;
+    if(d == "Right") snakeX += box;
+    if(d == "DOWN") snakeY += box;
+
+    // if snake eats food
+
+    if (snakeX == food.x && snakeY == food.y) {
+        score++
+        // eat.paly();
+        food = {
+            x = Math.floor(Math.random() * 17 + 1) * box,
+            y = Math.floor(Math.random() * 15 + 3) * box
+        }
+    }else{
+        //remove tail
+        snake.pop();
+    }
+    
+    //add new head
+    
+    let newHead = {
+        x: snakeX,
+        y: snakeY
+    }
+
+    snake.unshift(newHead);
 };
+
+// call draw function every 500ms 
+// this is option mode the game (low, medium, hard)
+let lvl = 500;
+let game = setInterval(draw, lvl);
+
