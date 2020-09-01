@@ -4,16 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake</title>
-    <style>
-        canvas{
-            display: block;
-            margin: 0 auto;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
     <canvas id="snake" width="608px" height="608px"></canvas>
+
+    <div class="level">
+        <div class="level__button">
+            <button type="button">Low</button>
+            <button type="button">Middle</button>
+            <button type="button">High</button>
+        </div>
+        <h3>Actual lvl: </h3>
+    </div>
+    
+    <div class="restart">
+        <button type="button">Restart</button>
+    </div>
     <script src="app.js"></script>
 
 </body>
