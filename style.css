@@ -17,6 +17,9 @@ canvas{
     display: flex;
     justify-content: center;
 } */
+.level h2{
+    color: whitesmoke;
+}
 .level .level__button button{
     background-color: #aad751;
     border: none;
@@ -25,6 +28,7 @@ canvas{
     margin: 10px;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.25);
     font-family: fantasy;
+    cursor: pointer;
 }
 .level .level__button button:hover{
     background-color: #a2d149;
@@ -44,6 +48,7 @@ canvas{
     margin: 10px;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.25);
     font-family: fantasy;
+    cursor: pointer;
 }
 .restart button:hover{
     background-color: #aad751;
