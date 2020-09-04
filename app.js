@@ -56,7 +56,7 @@ let food = {
 let d;
 
 // event listener to controle snake WSAD or ARROWS
-document.addEventListener("keydown", function clickKey(e) {
+clickKey = (e) => {
     let key = e.keyCode;
     if( key == 37 || key == 65 && d != "RIGHT"){
         left.play();
@@ -71,7 +71,7 @@ document.addEventListener("keydown", function clickKey(e) {
         d = "DOWN";
         down.play();
     }
-});
+}
 
 // colision snake
 function collision(head, array){
@@ -103,30 +103,31 @@ funModal = () => {
 let timeSpan = document.querySelector('.time-in-game');
 let scoreSpan = document.querySelector('.score-in-game');
 
-gameTime = () => {
-    let times = 0;
-    setInterval( timeGo = () => {
-        times++;
-        timeSpan.innerHTML = times;
-    }, 1000);
-    clearInterval(timeGo)
-};
+// gameTime = () => {
+//     let times = 0;
+//     setInterval( timeGo = () => {
+//         times++;
+//         timeSpan.innerHTML = times;
+//     }, 1000);
+//     clearInterval(timeGo)
+// };
 
 
 
 // Draw snake, food, ground in canvas
 function draw() {
+    // create image board game 
     ctx.drawImage(ground, 0, 0);
 
+    // create snake in board 
     for (let i = 0; i < snake.length; i++) {
         ctx.fillStyle = (1 == 0 ) ? "green" : "white";
         ctx.fillRect(snake[i].x, snake[i].y, box, box);
 
-        ctx.strokeStyle = "red";
         ctx.strokeRect(snake[i].x, snake[i].y, box, box);
     }
-    ctx.fillStyle = "red";
-    ctx.fillRect(food.x, food.y, box, box);
+    // create image apple in board
+    ctx.drawImage(foodImg, food.x, food.y)
 
     // head position
     let snakeX = snake[0].x;
@@ -162,7 +163,7 @@ function draw() {
         clearInterval(game);
         dead.play();
         funModal();
-        document.removeEventListener('keydown', clickKey(e))
+        document.removeEventListener("keydown", clickKey);
     };
 
     snake.unshift(newHead);
@@ -191,6 +192,7 @@ restart.addEventListener("click", () => {
 
 low.addEventListener('click', () => {
     restartGame();
+    document.addEventListener("keydown", clickKey);
     lvl = 500;
     actualLvl.innerHTML = "Low";
     game = setInterval(draw, lvl);
@@ -198,6 +200,7 @@ low.addEventListener('click', () => {
 
 middle.addEventListener('click', () => {
     restartGame();
+    document.addEventListener("keydown", clickKey);
     lvl = 300;
     actualLvl.innerHTML = "Middle";
     game = setInterval(draw, lvl);
@@ -205,6 +208,7 @@ middle.addEventListener('click', () => {
 
 high.addEventListener('click', () => {
     restartGame();
+    document.addEventListener("keydown", clickKey);
     lvl = 100;
     actualLvl.innerHTML = "High";
     game = setInterval(draw, lvl);
