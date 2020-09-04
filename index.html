@@ -8,20 +8,38 @@
 </head>
 <body>
     
+    <!-- canva - board game -->
     <canvas id="snake" width="608px" height="608px"></canvas>
 
+    <!-- Modla -  Game over -->
+    <div class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>Game over</p>
+          <p>Time: <span class="time-in-game"></span></p>
+          <p>Score: <span class="score-in-game"></span></p>
+        </div>  
+    </div>
+
+    <!-- <button id="myBtn">Open Modal</button> -->
+
+    <!-- choose button lvl -->
     <div class="level">
         <div class="level__button">
             <button class="low" type="button">Low</button>
             <button class="middle" type="button">Middle</button>
             <button class="high" type="button">High</button>
         </div>
-        <h2>Actual lvl: </h2>
+        <button class="dark-souls" type="button">Dark Souls</button>
+        <h2>Actual lvl: <span class="actual-lvl"></span></h2>
     </div>
-    
-    <div class="restart">
+
+    <!-- restart board button -->
+    <div class="box-restart">
         <button class="restart" type="button">Restart</button>
     </div>
+
+    <!-- script js -->
     <script src="app.js"></script>
 
 </body>

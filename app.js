@@ -9,10 +9,11 @@ ground.src = "img/ground.png";
 const foodImg = new Image();
 foodImg.src = "img/food.png";
 
-// button lvl and restart
+// button lvl, restart and information about actual lvl
 const low = document.querySelector('.low');
 const middle = document.querySelector('.middle');
 const high = document.querySelector('.high');
+const actualLvl = document.querySelector('.actual-lvl');
 
 const restart = document.querySelector('.restart');
 
@@ -55,7 +56,7 @@ let food = {
 let d;
 
 // event listener to controle snake WSAD or ARROWS
-document.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", function clickKey(e) {
     let key = e.keyCode;
     if( key == 37 || key == 65 && d != "RIGHT"){
         left.play();
@@ -82,6 +83,37 @@ function collision(head, array){
     return false;
 };
 
+// const test = document.querySelector('#myBtn');
+
+const closeModal = document.querySelector('.close');
+const modal = document.querySelector('.modal');
+
+funModal = () => {
+    modal.style.display = "block";
+    closeModal.addEventListener('click', () => {
+        modal.style.display = "none";
+    });
+    window.addEventListener('click', (e) => {
+        if (e.target == modal) {
+          modal.style.display = "none";
+        }
+    });
+};
+
+let timeSpan = document.querySelector('.time-in-game');
+let scoreSpan = document.querySelector('.score-in-game');
+
+gameTime = () => {
+    let times = 0;
+    setInterval( timeGo = () => {
+        times++;
+        timeSpan.innerHTML = times;
+    }, 1000);
+    clearInterval(timeGo)
+};
+
+
+
 // Draw snake, food, ground in canvas
 function draw() {
     ctx.drawImage(ground, 0, 0);
@@ -95,7 +127,6 @@ function draw() {
     }
     ctx.fillStyle = "red";
     ctx.fillRect(food.x, food.y, box, box);
-
 
     // head position
     let snakeX = snake[0].x;
@@ -127,10 +158,12 @@ function draw() {
     }
 
     //end game
-    if (snakeX < box || snakeX > 17 * box || snakeY < 3 * box || snakeY > 17*box || collision(newHead, snake) ) {
-        clearInterval(game)
+    if (snakeX < box || snakeX > 17 * box || snakeY < 3 * box || snakeY > 17 * box || collision(newHead, snake) ) {
+        clearInterval(game);
         dead.play();
-    }
+        funModal();
+        document.removeEventListener('keydown', clickKey(e))
+    };
 
     snake.unshift(newHead);
 
@@ -139,8 +172,41 @@ function draw() {
     ctx.fillText(score, 2 * box, 1.6 * box);
 };
 
-// call draw function every 300ms 
-// this is option mode the game (low, medium, hard)
+// draw only board
+drawBoard = () => {
+    ctx.drawImage(ground, 0, 0);
+};
 
-let lvl = 300;
-let game = setInterval(draw, lvl);
+// ***************************** //
+
+let game;
+
+restartGame = () => {
+    clearInterval(game);
+};
+
+restart.addEventListener("click", () => {
+    draw();
+});
+
+low.addEventListener('click', () => {
+    restartGame();
+    lvl = 500;
+    actualLvl.innerHTML = "Low";
+    game = setInterval(draw, lvl);
+});
+
+middle.addEventListener('click', () => {
+    restartGame();
+    lvl = 300;
+    actualLvl.innerHTML = "Middle";
+    game = setInterval(draw, lvl);
+});
+
+high.addEventListener('click', () => {
+    restartGame();
+    lvl = 100;
+    actualLvl.innerHTML = "High";
+    game = setInterval(draw, lvl);
+});
+
